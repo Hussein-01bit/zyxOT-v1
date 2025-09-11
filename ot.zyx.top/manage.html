@@ -817,6 +817,7 @@ if (cnt == 13)
 	</div>
 	<script>
 function dashboard() {
+	$('title').html('控制面板 - 在线加密系统');
 	$("#tab-dashboard").addClass('active');
 	$("#tab-script").removeClass('active');
 	$("#tab-userimport").removeClass('active');
@@ -827,6 +828,7 @@ function dashboard() {
 	$("#button-userpriv").removeClass('active');
 }
 function script() {
+	$('title').html('脚本管理 - 在线加密系统');
 	$("#tab-script").addClass('active');
 	$("#tab-dashboard").removeClass('active');
 	$("#tab-userimport").removeClass('active');
@@ -837,6 +839,7 @@ function script() {
 	$("#button-userpriv").removeClass('active');
 }
 function userimport() {
+	$('title').html('导入用户 - 在线加密系统');
 	$("#tab-userimport").addClass('active');
 	$("#tab-script").removeClass('active');
 	$("#tab-dashboard").removeClass('active');
@@ -847,6 +850,7 @@ function userimport() {
 	$("#button-userpriv").removeClass('active');
 }
 function userpriv() {
+	$('title').html('用户权限 - 在线加密系统');
 	$("#tab-userpriv").addClass('active');
 	$("#tab-script").removeClass('active');
 	$("#tab-userimport").removeClass('active');

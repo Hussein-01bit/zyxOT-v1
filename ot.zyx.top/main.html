@@ -268,7 +268,7 @@ function xorshift(x) {
 
 // 加密函数
 function go() {
-	const s = document.getElementById('text').value + String.fromCharCode(65535);
+	const s = document.getElementById('text').value;
 	
 	output = '';
 	
@@ -309,22 +309,31 @@ function go() {
 	}
 	
 	document.getElementById('password').value = output;
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&password", ans);
 	return;
 }
 
 let initialValue = "";
 document.getElementById('text').addEventListener('input', function(event) {
 	if (event.target.value !== initialValue) {
-	initialValue = event.target.value;
-	// localStorage.setItem("zyxOT-v1-main", Number(localStorage.getItem("zyxOT-v1-main")) + 1);
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&text", initialValue);
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&type", "<span style=\"color: red;\">加密</span>");
-	// if (localStorage.getItem("zyxOT-v1-username") == null) 
-	// 	localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&user", "<span style=\"font-weight: 500;\">匿名用户</span>");
-	// else 
-	// 	localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&user", "<span class=\"uoj-username\">" + localStorage.getItem("zyxOT-v1-username") + "</span>");
-	go();
+		initialValue = event.target.value;
+		let leng = initialValue.length;
+		for (let i = 0; i < leng - 1; i++) 
+			if (initialValue.substr(i, 2) == 'sb') {
+				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned", 1);
+				while (!confirm("您已被封禁，触发关键字：sb"));
+				localStorage.removeItem("zyxOT-v1-username");
+				location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
+			}
+			else if (initialValue.substr(i, 2) == '傻逼') {
+				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned", 1);
+				while (!confirm("您已被封禁，触发关键字：傻逼"));
+				localStorage.removeItem("zyxOT-v1-username");
+				location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
+			}
+		localStorage.setItem("zyxOT-v1-main-1", Number(localStorage.getItem("zyxOT-v1-main-1")) + 1);
+		if (localStorage.getItem("zyxOT-v1-username") != null) 
+			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-1", Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-1")) + 1);
+		go();
 	}
 });
 
@@ -383,16 +392,16 @@ function getv(x, y) {
 		let v = y;
 		v >>>= 0;
 		// alert(pow(2, 31));
-		for (let i = 1;i <= pow(2, 31);i >>>= 0, i *= 2){
-			v ^= (v & i) * pow(2, 3);
+		for (let i = 1;i < pow(2, 32);i *= 2){
+			v ^= ((v & i) << 3);
 			v >>>= 0;
 		}
 		for (let i = pow(2, 31);i > 0;i /= 2){
-			v ^= Math.floor((v & i) / pow(2, 17));
+			v ^= ((v & i) >>> 17);
 			v >>>= 0;
 		}
-		for (let i = 1;i <= pow(2, 31);i *= 2){
-			v ^= (v & i) * pow(2, 15);
+		for (let i = 1;i < pow(2, 32);i *= 2){
+			v ^= ((v & i) << 15);
 			v >>>= 0;
 		}
 		y = v;
@@ -460,24 +469,19 @@ function ba() {
 		s.push(getv(x, y));
 	}
 	for (let i = 0; i < n; i++) 
-		ans += ((a[i] - s[i] + 65537) % 65537 * qinv(c[i]) % 65537) + ' ';
+		ans += String.fromCharCode((a[i] - s[i] + 65537) % 65537 * qinv(c[i]) % 65537);
 	document.getElementById('text2').value = ans;
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&text", ans);
 	return;
 }
 
 let initialValue2 = "";
 document.getElementById('password2').addEventListener('input', function(event2) {
 	if (event2.target.value !== initialValue2) {
-	initialValue2 = event2.target.value;
-	// localStorage.setItem("zyxOT-v1-main", Number(localStorage.getItem("zyxOT-v1-main")) + 1);
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&password", initialValue);
-	// localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&type", "<span style=\"color: #0c0;\">解密</span>");
-	// if (localStorage.getItem("zyxOT-v1-username") == null) 
-	// 	localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&user", "<span style=\"font-weight: 500;\">匿名用户</span>");
-	// else 
-	// 	localStorage.setItem("zyxOT-v1-main?id=" + localStorage.getItem("zyxOT-v1-main") + "&user", "<span class=\"uoj-username\">" + localStorage.getItem("zyxOT-v1-username") + "</span>");
-	ba();
+		initialValue2 = event2.target.value;
+		localStorage.setItem("zyxOT-v1-main-2", Number(localStorage.getItem("zyxOT-v1-main-2")) + 1);
+		if (localStorage.getItem("zyxOT-v1-username") != null) 
+			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-2", Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-2")) + 1);
+		ba();
 	}
 });
 
@@ -523,12 +527,14 @@ document.getElementById('password2').addEventListener('input', function(event2) 
 	</script>
 	<script>
 function goto() {
+	$("title").html('加密 - 在线加密系统');
 	$("#tab-goto").addClass('active');
 	$("#tab-back").removeClass('active');
 	$("#button-goto").addClass('active');
 	$("#button-back").removeClass('active');
 }
 function back() {
+	$("title").html('解密 - 在线加密系统');
 	$("#tab-back").addClass('active');
 	$("#tab-goto").removeClass('active');
 	$("#button-back").addClass('active');
@@ -538,7 +544,15 @@ function back() {
 			</div>
 		</div>
 	</div>
+<div class="alert alert-danger mt-4">
+	<h4>注意</h4>
+	<p>本平台的所有算法都不具有安全性，请勿用于情报战等关键场景，如果因为加密问题引发情报泄露，本平台概不负责。</p>
+	<p>All algorithms on this platform are not secure and should not be used in critical scenarios such as intelligence warfare. If intelligence leakage occurs due to encryption issues, this platform is not responsible.</p>
+	<p>Все алгоритмы Платформы не являются безопасными и не должны использоваться в критических сценариях, таких как разведывательные войны, и Платформа не несет ответственности за утечку информации из - за проблем с шифрованием.</p>
+	<p>当プラットフォームのすべてのアルゴリズムは安全性を持っていないので、情報戦などの重要なシーンには使用しないでください。暗号化問題で情報漏洩が発生した場合、当プラットフォームは一切責任を負いません。</p>
 </div>
+</div>
+
 
 </div>
 	<script>

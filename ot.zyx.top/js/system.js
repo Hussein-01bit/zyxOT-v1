@@ -127,11 +127,11 @@ function htmlspecialchars(str)
 }
 function getColOfScore(score) {
 	if (score == 0) {
-		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(0, 100, 80)));
+		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(0, 76, 86)));
 	} else if (score == 100) {
-		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(120, 100, 80)));
+		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(130, 89, 72)));
 	} else {
-		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(30 + score * 60 / 100, 100, 90)));
+		return ColorConverter.toStr(ColorConverter.toRGB(new HSV(30 + score * 60 / 100, 83, 89)));
 	}
 }
 
@@ -150,7 +150,7 @@ function getUserLink(username, realname, color) {
 	if (color) {
 		className += ' uoj-username-' + color;
 	}
-	return '<a class="' + className + '" href="' + uojHome + '/user/' + username + '">' + text + '</a>';
+	return '<a class="' + className + '" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/user.html?' + username + '">' + text + '</a>';
 }
 function getUserSpan(username, realname, color) {
 	if (!username) {
@@ -173,7 +173,11 @@ function getUserSpan(username, realname, color) {
 function replaceWithHighlightUsername() {
 	var username = $(this).text();
 	var realname = $(this).data("realname");
-	var color = $(this).data("color");
+	var color = localStorage.getItem('zyxOT-v1-user=' + username + '?color');
+	if (localStorage.getItem('zyxOT-v1-user=' + username + '?banned') == 1) {
+		color = "brown";
+		realname = "banned"
+	}
 
 	if ($(this).data("link") != 0) {
 		$(this).replaceWith(getUserLink(username, realname, color));
@@ -472,11 +476,11 @@ $.fn.uoj_highlight = function() {
 			var maxscore = parseInt($(this).data('max'));
 			if (isNaN(score) && $(this).text().substring(0, 17) == "Pass the subtask#") {
 				score = 100;
-				$(this).css("font-weight", 800);
+				$(this).css("font-weight", 700);
 			}
 			if (isNaN(score) && $(this).text().substring(0, 17) == "Fail the subtask#") {
 				score = 0;
-				$(this).css("font-weight", 800);
+				$(this).css("font-weight", 700);
 			}
 			if (isNaN(score) && $(this).text().length > 4) {
 				$(this).css("font-weight", 400);
@@ -1269,7 +1273,7 @@ var top_dock_text = "";
 if (localStorage.getItem("zyxOT-v1-username") == null) {
 	if (localStorage.getItem("zyxOT-v1-guest-translation") == "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
-	if (localStorage.getItem("zyxOT-v1-guest-see_toushi") == "true") 
+	if (localStorage.getItem("zyxOT-v1-guest-toushi") == "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-guest-help") == "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
@@ -1283,7 +1287,7 @@ if (localStorage.getItem("zyxOT-v1-username") == null) {
 else {
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-translation") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unseed") != "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
-	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-see_toushi") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unsee_toushi") != "true") 
+	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-toushi") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted") != "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-help") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unhelped") != "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
@@ -1303,6 +1307,11 @@ if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("z
 else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-banned") == "false") {
 	document.querySelector("title").innerHTML = "403 - 在线加密系统";
 	document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
+}
+else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned") == 1) {
+	while (!confirm("您已被封禁"));
+	localStorage.removeItem("zyxOT-v1-username");
+	location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
 }
 
 document.querySelector("body").style.fontFamily = '"Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans"';

@@ -281,6 +281,14 @@ if (localStorage.getItem("zyxOT-v1-default-register") == "true")
 	document.querySelector("#PRIV_DEFAULT_REGISTER_USER").checked = 1;
 
 function register() {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
 	localStorage.setItem("zyxOT-v1-guest-register", document.querySelector("#PRIV_GYEST_REGISTER_USER").checked);
 	localStorage.setItem("zyxOT-v1-default-register", document.querySelector("#PRIV_DEFAULT_REGISTER_USER").checked);
 	alert("Priv has been updated to 1.");
@@ -311,13 +319,21 @@ function register() {
 				<tbody>
 					<script>
 for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) {
-	document.write("<tr><td>" + i + "</td><td><span class='uoj-username'>" + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_admin" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_admin" style="cursor: pointer; user-select: none">admin</label></td></tr>');
+	document.write("<tr><td>" + i + "</td><td><span class='uoj-username'>" + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_admin" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_admin" style="cursor: pointer; user-select: none">root</label></td></tr>');
 }
 					</script>
 				</tbody>
 			</table>
 			<script>
 function to_admin() {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
 	for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) 
 		if (document.querySelector("#uid_" + i + "_admin").checked == true)
 			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage", 1);
@@ -529,6 +545,14 @@ if (localStorage.getItem("zyxOT-v1-default-edit_tification") == "true")
 if (localStorage.getItem("zyxOT-v1-default-register") == "true") 
 	document.querySelector("#PRIV_DEFAULT_REGISTER_USER1").checked = 1, cnt++;
 function to_perm() {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
 	localStorage.setItem("zyxOT-v1-default-manage", document.querySelector("#PRIV_EDIT_SYSTEM").checked || document.querySelector("#PRIV_ALL").checked);
 	localStorage.setItem("zyxOT-v1-default-banned", document.querySelector("#PRIV_USER_PROFILE").checked || document.querySelector("#PRIV_ALL").checked);
 	localStorage.setItem("zyxOT-v1-default-login", document.querySelector("#PRIV_USER_LOGIN").checked || document.querySelector("#PRIV_ALL").checked);
@@ -563,6 +587,57 @@ function to_perm() {
 	</div>
 		<div class="card-footer bg-transparent">
 			<button type="submit" onclick="to_perm();" class="btn btn-primary">更新权限</button>
+		</div>
+</div>
+
+		</div>
+		<div class="tab-pane" id="tab-table">
+
+<div class="card card-default">
+	<div class="card-body">
+		<h3 class="card-tittle">数据</h3>
+			<table class="table table-striped table-vertical-middle table-text-center">
+				<thead>
+					<tr>
+						<th style="width:10%">用户 ID</th>
+						<th style="width:40%">用户名</th>
+						<th style="width:10%;">加密次数</th>
+						<th style="width:10%;">加密/总数</th>
+						<th style="width:10%;">解密次数</th>
+						<th style="width:10%;">解密/总数</th>
+						<th style="width:10%;">权限</th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+document.write('<tr><td>#</td><td>ALL</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '">' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '</td><td><span class="uoj-score" data-max="100">100.000%</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '">' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '</td><td><span class="uoj-score" data-max="100">100.000%</td><td></td></tr>');
+for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) {
+	document.write('<tr><td>' + i + '</td><td><span class="uoj-username">' + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) / Number(localStorage.getItem("zyxOT-v1-main-1")) * 100).toFixed(3)) + '%</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) / Number(localStorage.getItem("zyxOT-v1-main-2")) * 100).toFixed(3)) + '%</td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_banned" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_banned" style="cursor: pointer; user-select: none">banned</label></td></tr>');
+}
+					</script>
+				</tbody>
+			</table>
+			<script>
+function to_banned() {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-domain") != "true") {
+		while (!confirm("Oops！您无权进行操作"));
+		return;
+	}
+	for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) 
+		if (document.querySelector("#uid_" + i + "_banned").checked == true)
+			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned", 1);
+		else 
+			localStorage.removeItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned");
+	alert("已更新用户权限。");
+}
+			</script>
+	</div>
+		<div class="card-footer bg-transparent text-end">
+			<button type="submit" onclick="to_banned();" class="btn btn-primary">提交</button>
 		</div>
 </div>
 
@@ -694,8 +769,8 @@ function ticket() {
 	$("title").html('投食审核 - 在线加密系统');
 }
 
-if (location.href.substr(location.href.length - 7, 7) == "?script") {
-	script();
+if (location.href.substr(location.href.length - 7, 7) == "?status") {
+	table();
 }
 	</script>
 	</div>
@@ -703,11 +778,11 @@ if (location.href.substr(location.href.length - 7, 7) == "?script") {
 
 </div>
 	<script>
-	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-manage") != "true") {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-see_domain") != "true") {
 		document.querySelector("title").innerHTML = "403 - 在线加密系统";
 		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
 	}
-	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-manage") != "true") {
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-see_domain") != "true") {
 		document.querySelector("title").innerHTML = "403 - 在线加密系统";
 		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
 	}
