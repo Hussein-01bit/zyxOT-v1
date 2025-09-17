@@ -198,7 +198,7 @@ mb-4
 
 <div class="tab-pane active" id="tab-goto">
 	<h1>
-	加密</h1>
+	加密解密</h1>
 	<style>
 		#text,
 		#password {
@@ -219,7 +219,7 @@ mb-4
 			</div>
 		</div>
 		<div class="card-footer bg-transparent text-end">
-			<a href="help.html#main-goto" target="_blank">使用教程</a>
+			<a href="faq.html#main-goto" target="_blank">使用教程</a>
 		</div>
 <script>
 // 模拟C++中的random_device（简化版）
@@ -316,20 +316,14 @@ let initialValue = "";
 document.getElementById('text').addEventListener('input', function(event) {
 	if (event.target.value !== initialValue) {
 		initialValue = event.target.value;
-		let leng = initialValue.length;
-		for (let i = 0; i < leng - 1; i++) 
-			if (initialValue.substr(i, 2) == 'sb') {
-				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned", 1);
-				while (!confirm("您已被封禁，触发关键字：sb"));
-				localStorage.removeItem("zyxOT-v1-username");
-				location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
-			}
-			else if (initialValue.substr(i, 2) == '傻逼') {
-				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned", 1);
-				while (!confirm("您已被封禁，触发关键字：傻逼"));
-				localStorage.removeItem("zyxOT-v1-username");
-				location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
-			}
+		// let leng = initialValue.length;
+		// for (let i = 0; i < leng - 1; i++) 
+		// 	if ((initialValue.substr(i, 2) == 'sb' && initialValue.substr(i - 1, 4) != '.sbs') || initialValue.substr(i, 2) == '傻逼' || initialValue.substr(i, 2) == 'WC' || initialValue.substr(i, 2) == 'wc' || initialValue.substr(i, 2) == '卧槽' || initialValue.substr(i, 2) == '我操' || initialValue.substr(i, 2) == 'TM' || initialValue.substr(i, 2) == 'tm' || initialValue.substr(i, 2) == 'nm' || initialValue.substr(i, 2) == '你妈' || initialValue.substr(i, 2) == '混蛋' || initialValue.substr(i, 2) == '滚蛋' || initialValue.substr(i, 2) == '傻瓜' || initialValue.substr(i, 2) == '他妈' || initialValue.substr(i, 2) == '王八') {
+		// 		localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned", 1);
+		// 		while (!confirm("您已被封禁，触发关键字：" + initialValue.substr(i, 2)));
+		// 		localStorage.removeItem("zyxOT-v1-username");
+		// 		location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
+		// 	}
 		localStorage.setItem("zyxOT-v1-main-1", Number(localStorage.getItem("zyxOT-v1-main-1")) + 1);
 		if (localStorage.getItem("zyxOT-v1-username") != null) 
 			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-1", Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?main-1")) + 1);
@@ -363,7 +357,7 @@ document.getElementById('text').addEventListener('input', function(event) {
 			</div>
 		</div>
 		<div class="card-footer bg-transparent text-end">
-			<a href="help.html#main-back" target="_blank">使用教程</a>
+			<a href="faq.html#main-back" target="_blank">使用教程</a>
 		</div>
 <script>
 function quickpow(x, y) {

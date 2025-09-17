@@ -1287,7 +1287,7 @@ if (localStorage.getItem("zyxOT-v1-username") == null) {
 else {
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-translation") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unseed") != "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
-	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-toushi") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted") != "true") 
+	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-toushi") == "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-help") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unhelped") != "true") 
 		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>投食 - 在线加密系统</title>
+		<title>帮助 - 在线加密系统</title>
 
 	<script type="text/javascript">
 		uojHome = ''; // 'https://sjzezoj.com/';
@@ -195,96 +195,57 @@ mb-4
 
 <div class="tab-pane active" id="tab-goto">
 	<h1>
-	投食</h1>
-	<style>
-		#go_to_password, #go_to_text {
-			font-family: Menlo, Cascadia Mono, Ubuntu Mono, Roboto Mono, Jetbrains Mono, Fira Code, Consolas, '思源黑体 Regular', '思源宋体 Light', '宋体', 'Courier New', monospace;
-			width: 100%;
-		}
-	</style>
+	帮助</h1>
 	<div class="card card-default" id="tification">
 			<div class="card-body">
-		<div class="row">
-			<div id="div-toushiname" class="col-sm-12">
-				<label>算法名称</label>
-				<input type="text" class="form-control" id="input-toushiname" name="toushiname">
-			</div>
-		</div>
-		<div id="div-toushiname">
-			<label>加密代码 (C++/JavaScript)</label>
-			<textarea class="form-control" id="go_to_password"></textarea>
-		</div>
-		<div id="div-toushiname">
-			<label>解密代码 (C++/JavaScript)</label>
-			<textarea class="form-control" id="go_to_text"></textarea>
-		</div>
-	</div>
-			<div class="card-footer bg-transparent">
-				<div class="row">
-					<div class="col-sm-6" style="text-align: left;">
-						<button type="submit" onclick="submit();" class="btn btn-primary">提交</button>
-					</div>
-					<div class="col-sm-6" style="text-align: right;">
-						<a href="faq.html#submit" target="_blank">使用教程</a>
-					</div>
-				</div>
-			</div>
-</div>
+	<h4 id="what_is_zyxOT">什么是 zyxOT</h4>
+	<p>众所周知，加密是保护隐私安全地唯一方式，随着隐私信息泄密的事故越来越多，加密也变得非常重要，遗憾的是，懂得加密的人一直较为稀缺。</p>
+				<p>为了让人类更好地学习加密，本站特别推出随机数码加密系统，帮助人类学习加密。</p>
+<p>随机数码加密系统博大精深，虽然只有0~9、A~Z、a~z、'['、']'、' '、'\n'这66个字符，但是内涵十分丰富，根据研究，同一个字符能够被表示成4295098369种不同地数码组合。</p>
+<p>并且推出加密投食系统，通过以下方式提交新的加密方法：</p>
+<ul><li>第一行一个字符串表示加密语法的名称，然后通过<pre>```cpp
+/*C++源代码，写入加密代码*/
+```</pre></li><li>最后通过<pre>```cpp
+/*C++源代码，写入解密代码*/
+```</pre></li></ul></p>
+<h4 id="who_to_register">如何注册用户</h4>
 <script>
-	function submit() {
-		if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted") == "true") {
-			alert("好像哪里有点问题\n您已被禁言");
-			return;
-		}
-		if (!confirm("确认提交吗？提交后将会等待审核，等待期间您将被禁言。"))
-			return;
-		let this_id = localStorage.getItem("zyxOT-v1-toushi?id");
-		this_id++;
-		localStorage.setItem("zyxOT-v1-toushi?id", this_id);
-		let text1 = '';
-		for (let i = 0; i < document.querySelector('#go_to_password').value.length; i++) 
-			if (document.querySelector('#go_to_password').value[i] == '<') 
-				text1 += '&lt;';
-			else 
-				text1 += document.querySelector('#go_to_password').value[i];
-		let text2 = '';
-		for (let i = 0; i < document.querySelector('#go_to_text').value.length; i++) 
-			if (document.querySelector('#go_to_text').value[i] == '<') 
-				text2 += '&lt;';
-			else 
-				text2 += document.querySelector('#go_to_text').value[i];
-		localStorage.setItem('zyxOT-v1-toushi?id=' + this_id, '<div class="card card-default mb-3 top-buffer-sm"><div class="card-header"><div class="row"><div class="col-sm-9"><h4 class="card-title">' + document.querySelector('#input-toushiname').value + '</h4></div><div class="col-sm-3" style="text-align: right;"><span class="text-warning">作者: </span><span class="uoj-username">' + localStorage.getItem("zyxOT-v1-username") + '</span></div></div></div><div class="card-body"><h4>加密代码</h4><pre class="card card-default"><code class="hljs hljs-cpp">' + text1 + '</code></pre><h4>解密代码</h4><pre class="card card-default"><code class="hljs hljs-cpp">' + text2 + '</code></pre></div></div>');
-		localStorage.setItem('zyxOT-v1-toushi?id=' + this_id + '&user', localStorage.getItem("zyxOT-v1-username"));
-		localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted", "true");
-		location.href = "";
+	if (localStorage.getItem("zyxOT-v1-username") == null) {
+		if (localStorage.getItem("zyxOT-v1-guest-register") == "true") 
+			document.write('<p>点击 <a role="button" class="btn btn-outline-primary" href="register.html">注册</a> 以注册用户。</p>');
+		else 
+			document.write('<p>点击 <button class="btn btn-outline-primary" disabled>注册</button> 以注册用户。</p>\n<p class="text-danger">当前不可注册新用户。</p>');
+	}
+	else {
+		if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-register") == "true") 
+			document.write('<p>点击 <a role="button" class="btn btn-outline-primary" href="register.html">注册</a> 以注册用户。</p>');
+		else 
+			document.write('<p>点击 <button class="btn btn-outline-primary" disabled>注册</button> 以注册用户。</p>\n<p class="text-danger">当前不可注册新用户。</p>');
 	}
 </script>
-<div class="mt-2 alert alert-danger">
-				<p>只允许通过读写计算机的输入/输出端口以及对指定库函数的调用等方式与外部环境通信。在程序中严禁下列操作：</p>
-				<ul>
-<li>试图访问网络</li>
-<li>使用fork、exec、system或其它线程/进程生成函数</li>
-<li>打开任何文件和目录</li>
-<li>运行其它程序</li>
-<li>改变文件系统的访问权限</li>
-<li>读写文件系统的管理信息</li>
-<li>使用除读写规定的输入/输出文件之外的其它系统调用</li>
-<li>捕获和处理鼠标和键盘的输入消息</li>
-<li>试图无限递归创建子进程</li>
-<li>除程序调用abort的异常终止外，程序返回值必须是0</li>
-</ul>
-<p>如果违规，本加密系统将会拒绝投食，如果是网页版则账号将会被永久封禁，如果是本地版将立即启动自毁程序。</p>
-			</div>
+	<h4 id="main-goto">如何加密</h4>
+	<p>首先打开加密页面，在左侧输入您想要加密的内容，但请注意，不要输入一些危险词语，比如 <code>sb</code>、<code>傻逼</code> 等，不然会被直接封号。</p>
+	<h4 id="main-back">如何解密</h4>
+	<p>首先打开解密页面，在左侧输入您的密文内容，但请注意，如果对方给您的明文中含有一些危险词语，比如 <code>sb</code>、<code>傻逼</code> 等，请不要与对方长期联系。</p>
+	<h4 id="submit">如何投食</h4>
+	<p>如果你是未登录用户，您无权进行投食。如果您是已登录用户，请打开投食页面，然后输入加密算法的名称，并输入加密代码和解密代码，但请注意，一定要输入 C++/js 语言，不然会被永久禁言，并点击提交，由于管理员审核期间，您不能再次提交加密算法，所以系统会将您<strong>暂时</strong>禁言，等待管理员审核。</p>
+	<h4 id="toushi_shen_he">投食审核要求</h4>
+	<p>如果有出现严重违反要求，如 不提交对应语言、辱骂 等行为，管理员可直接将其 拒绝并禁言。</p>
+	<p>如果出现一些问题，比如程序 CE、RE 等现象，管理员可以打回。</p>
+	<p>如果发现一个非常好的算法，甚至好过现在使用的算法，管理员可以通过，但请注意管理员一次只能通过一种算法，所以管理员应选择最好的通过。</p>
+	</div>
+	</div>
+</div>
 </div>
 
 
 </div>
 	<script>
-	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-toushi") != "true") {
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-help") != "true") {
 		document.querySelector("title").innerHTML = "403 - 在线加密系统";
 		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
 	}
-	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-toushi") != "true") {
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-help") != "true") {
 		document.querySelector("title").innerHTML = "403 - 在线加密系统";
 		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
 	}

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>投食 - 在线加密系统</title>
+		<title>注册 - 在线加密系统</title>
 
 	<script type="text/javascript">
 		uojHome = ''; // 'https://sjzezoj.com/';
@@ -193,102 +193,181 @@ mb-4
 	
 	<div class="uoj-content container flex-fill">
 
-<div class="tab-pane active" id="tab-goto">
-	<h1>
-	投食</h1>
-	<style>
-		#go_to_password, #go_to_text {
-			font-family: Menlo, Cascadia Mono, Ubuntu Mono, Roboto Mono, Jetbrains Mono, Fira Code, Consolas, '思源黑体 Regular', '思源宋体 Light', '宋体', 'Courier New', monospace;
-			width: 100%;
-		}
-	</style>
-	<div class="card card-default" id="tification">
-			<div class="card-body">
-		<div class="row">
-			<div id="div-toushiname" class="col-sm-12">
-				<label>算法名称</label>
-				<input type="text" class="form-control" id="input-toushiname" name="toushiname">
-			</div>
-		</div>
-		<div id="div-toushiname">
-			<label>加密代码 (C++/JavaScript)</label>
-			<textarea class="form-control" id="go_to_password"></textarea>
-		</div>
-		<div id="div-toushiname">
-			<label>解密代码 (C++/JavaScript)</label>
-			<textarea class="form-control" id="go_to_text"></textarea>
-		</div>
-	</div>
-			<div class="card-footer bg-transparent">
-				<div class="row">
-					<div class="col-sm-6" style="text-align: left;">
-						<button type="submit" onclick="submit();" class="btn btn-primary">提交</button>
-					</div>
-					<div class="col-sm-6" style="text-align: right;">
-						<a href="faq.html#submit" target="_blank">使用教程</a>
-					</div>
+<style>
+	.login-container {
+		max-width: 400px;
+		padding: 15px;
+	}
+
+	.login-input-group-item {
+		margin-bottom: -1px;
+	}
+</style>
+
+<main class="login-container mx-auto w-100 text-center">
+	<form id="form-login" method="post">
+		<h1>zyxOT</h1>
+
+		<div class="login-input-group mb-3">
+			<div id="div-username" class="input-group">
+				<div class="form-floating">
+					<input type="text" class="form-control rounded-0 rounded-top login-input-group-item" id="input-username" name="username" placeholder="输入用户名" maxlength="20" />
+					<label for="input-username">输入用户名</label>
 				</div>
 			</div>
-</div>
-<script>
-	function submit() {
-		if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted") == "true") {
-			alert("好像哪里有点问题\n您已被禁言");
-			return;
+
+			<div id="div-password" class="input-group">
+				<div class="form-floating">
+					<input type="password" class="form-control rounded-0 login-input-group-item" id="input-password" name="password" placeholder="输入密码" maxlength="20" />
+					<label for="input-password">输入密码</label>
+				</div>
+			</div>
+
+			<div id="div-again-password" class="input-group">
+				<div class="form-floating">
+					<input type="password" class="form-control rounded-0 login-input-group-item" style="border-bottom-left-radius: var(--bs-border-radius) !important; border-bottom-right-radius: var(--bs-border-radius) !important" id="input-again-password" name="password" placeholder="输入密码" maxlength="20" />
+					<label for="input-again-password">再次输入密码</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-danger">
+			<span id="help-username"></span>
+			<span id="help-password"></span>
+		</div>
+
+		<button type="submit" id="button-submit" class="mt-4 w-100 btn btn-lg btn-primary">登录</button>
+	</form>
+</main>
+
+<script type="text/javascript">
+	function refreshCaptcha() {
+		$("#captcha").attr("src", '?');
+	}
+
+	function getFormErrorAndShow(type, t) {
+		if (type == 'username') {
+			if (t == '') {
+				$('#div-username').addClass('has-validation');
+				$('#div-username > .form-floating, #input-username').addClass('is-invalid');
+				$('#help-username').html('用户名不能为空。');
+				return false;
+			}
+			else if (!(/^[a-zA-Z0-9_]+$/.test(t))) {
+				$('#div-username').addClass('has-validation');
+				$('#div-username > .form-floating, #input-username').addClass('is-invalid');
+				$('#help-username').html('用户名应只包含大小写英文字母、数字和下划线。');
+				return false;
+			}
+			else 
+				return true;
 		}
-		if (!confirm("确认提交吗？提交后将会等待审核，等待期间您将被禁言。"))
-			return;
-		let this_id = localStorage.getItem("zyxOT-v1-toushi?id");
-		this_id++;
-		localStorage.setItem("zyxOT-v1-toushi?id", this_id);
-		let text1 = '';
-		for (let i = 0; i < document.querySelector('#go_to_password').value.length; i++) 
-			if (document.querySelector('#go_to_password').value[i] == '<') 
-				text1 += '&lt;';
+		else if (type == 'password') {
+			if (t.length < 6) {
+				$('#div-password').addClass('has-validation');
+				$('#div-password > .form-floating, #input-password').addClass('is-invalid');
+				$('#div-again-password').addClass('has-validation');
+				$('#div-again-password > .form-floating, #input-again-password').addClass('is-invalid');
+				$('#help-password').html('密码长度不应小于6。');
+				return false;
+			}
 			else 
-				text1 += document.querySelector('#go_to_password').value[i];
-		let text2 = '';
-		for (let i = 0; i < document.querySelector('#go_to_text').value.length; i++) 
-			if (document.querySelector('#go_to_text').value[i] == '<') 
-				text2 += '&lt;';
-			else 
-				text2 += document.querySelector('#go_to_text').value[i];
-		localStorage.setItem('zyxOT-v1-toushi?id=' + this_id, '<div class="card card-default mb-3 top-buffer-sm"><div class="card-header"><div class="row"><div class="col-sm-9"><h4 class="card-title">' + document.querySelector('#input-toushiname').value + '</h4></div><div class="col-sm-3" style="text-align: right;"><span class="text-warning">作者: </span><span class="uoj-username">' + localStorage.getItem("zyxOT-v1-username") + '</span></div></div></div><div class="card-body"><h4>加密代码</h4><pre class="card card-default"><code class="hljs hljs-cpp">' + text1 + '</code></pre><h4>解密代码</h4><pre class="card card-default"><code class="hljs hljs-cpp">' + text2 + '</code></pre></div></div>');
-		localStorage.setItem('zyxOT-v1-toushi?id=' + this_id + '&user', localStorage.getItem("zyxOT-v1-username"));
-		localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?muted", "true");
-		location.href = "";
+				return true;
+		}
+	}
+
+	function validateLoginPost() {
+		$('#div-username, #div-password').removeClass('has-validation');
+		$('#input-username, #input-password').removeClass('is-invalid');
+		$('#help-username, #help-password').html('');
+		var ok = true;
+		ok &= getFormErrorAndShow('username', $('#input-username').val());
+		ok &= getFormErrorAndShow('password', $('#input-password').val());
+		ok &= getFormErrorAndShow('password', $('#input-again-password').val());
+		return ok;
+	}
+
+	function hash(s) {
+		var ans = 0;
+		for (var i = 0; i < s.length; i++) {
+			ans += s[i].charCodeAt() * 130;
+			ans %= 998244353;
+		}
+		return ans;
+	}
+
+	function getuserwrong() {
+		$('#div-username, #div-password, #div-again-password').removeClass('has-validation');
+		$('#input-username, #input-password, #input-again-password').removeClass('is-invalid');
+		$('#help-username, #help-password, #input-again-password').html('');
+
+		var username = $('#input-username').val();
+		var password = hash($('#input-password').val());
+		var again_password = hash($('#input-again-password').val());
+
+		if (localStorage.getItem("zyxOT-v1-user=" + username + "?password") == null && again_password == password) 
+			msg = 'ok';
+		else if (localStorage.getItem("zyxOT-v1-user=" + username + "?password") != null)
+			msg = "username:wrong";
+		else 
+			msg = "password:wrong";
+
+		if (msg == 'ok') {
+			localStorage.setItem("zyxOT-v1-uid", Number(localStorage.getItem("zyxOT-v1-uid")) + 1);
+			localStorage.setItem("zyxOT-v1-user=" + username + "?password", password);
+			localStorage.setItem("zyxOT-v1-user=" + username + "?color", "cyan");
+			localStorage.setItem("zyxOT-v1-uid=" + localStorage.getItem("zyxOT-v1-uid"), username);
+			alert("欢迎你，" + username + "，您已注册成功。");
+			history.back();
+			window.event.returnValue = false;
+			return true;
+		} else if (msg == 'username:wrong') {
+			$('#div-username').addClass('has-validation');
+			$('#div-username > .form-floating, #input-username').addClass('is-invalid');
+			$('#help-username').html('该用户名已被使用过。');
+			refreshCaptcha();
+		} else {
+			$('#div-password').addClass('has-validation');
+			$('#div-password > .form-floating, #input-password').addClass('is-invalid');
+			$('#div-again-password').addClass('has-validation');
+			$('#div-again-password > .form-floating, #input-again-password').addClass('is-invalid');
+			$('#help-password').html('两次输入的密码不一致。');
+			refreshCaptcha();
+		}
+		return false;
+	}
+
+	function submitLoginPost() {
+		if (!validateLoginPost() || !getuserwrong()) {
+			refreshCaptcha();
+			return false;
+		}
+		return true;
+	}
+
+	$(document).ready(function() {
+		refreshCaptcha();
+
+		$('#form-login').submit(function(e) {
+			e.preventDefault();
+			submitLoginPost();
+		});
+	});
+</script>
+
+</div>
+
+<script>
+	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-register") == "false") {
+		document.querySelector("title").innerHTML = "403 - 在线加密系统";
+		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
+	}
+	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-register") == "false") {
+		document.querySelector("title").innerHTML = "403 - 在线加密系统";
+		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
 	}
 </script>
-<div class="mt-2 alert alert-danger">
-				<p>只允许通过读写计算机的输入/输出端口以及对指定库函数的调用等方式与外部环境通信。在程序中严禁下列操作：</p>
-				<ul>
-<li>试图访问网络</li>
-<li>使用fork、exec、system或其它线程/进程生成函数</li>
-<li>打开任何文件和目录</li>
-<li>运行其它程序</li>
-<li>改变文件系统的访问权限</li>
-<li>读写文件系统的管理信息</li>
-<li>使用除读写规定的输入/输出文件之外的其它系统调用</li>
-<li>捕获和处理鼠标和键盘的输入消息</li>
-<li>试图无限递归创建子进程</li>
-<li>除程序调用abort的异常终止外，程序返回值必须是0</li>
-</ul>
-<p>如果违规，本加密系统将会拒绝投食，如果是网页版则账号将会被永久封禁，如果是本地版将立即启动自毁程序。</p>
-			</div>
-</div>
-
-
-</div>
-	<script>
-	if (localStorage.getItem("zyxOT-v1-username") == null && localStorage.getItem("zyxOT-v1-guest-toushi") != "true") {
-		document.querySelector("title").innerHTML = "403 - 在线加密系统";
-		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
-	}
-	else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") != 1 && localStorage.getItem("zyxOT-v1-default-toushi") != "true") {
-		document.querySelector("title").innerHTML = "403 - 在线加密系统";
-		document.querySelector(".uoj-content").innerHTML = '<div class="text-center"><div style="font-size:233px">403</div><p>禁止入内！ T_T</p></div>			';
-	}
-	</script>
+	
 	<footer class="bg-body text-muted pt-3 pb-4 mt-4" style="font-size: 0.9em">
 		<div class="container d-lg-flex justify-content-lg-between">
 			<div>
