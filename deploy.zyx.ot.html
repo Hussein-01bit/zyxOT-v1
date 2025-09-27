@@ -242,14 +242,6 @@ mb-4
 				return false;
 			}
 		}
-		else if (type == 'pan') {
-			if (t != 'C' && t != 'D' && t != 'E' && t != 'F') {
-				$('#div-pan').addClass('has-validation');
-				$('#div-pan > .form-floating, #input-pan').addClass('is-invalid');
-				$('#help-pan').html('没有按规则填写部署磁盘。');
-				return false;
-			}
-		}
 		return true;
 	}
 

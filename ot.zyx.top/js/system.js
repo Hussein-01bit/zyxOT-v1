@@ -136,6 +136,9 @@ function getColOfScore(score) {
 }
 
 function getUserLink(username, realname, color) {
+	if (localStorage.getItem('zyxOT-v1-user=' + username + '?password') == -1) {
+		return '/';
+	}
 	if (!username) {
 		return '';
 	}
@@ -150,9 +153,12 @@ function getUserLink(username, realname, color) {
 	if (color) {
 		className += ' uoj-username-' + color;
 	}
-	return '<a class="' + className + '" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/user.html?' + username + '">' + text + '</a>';
+	return '<a class="' + className + '" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/user.html?' + username + '">' + text + '</a>';
 }
 function getUserSpan(username, realname, color) {
+	if (localStorage.getItem('zyxOT-v1-user=' + username + '?password') == -1) {
+		return '/';
+	}
 	if (!username) {
 		return '';
 	}
@@ -273,12 +279,12 @@ function validateMotto(str) {
 // tags
 $.fn.uoj_problem_tag = function() {
 	return this.each(function() {
-		$(this).attr('href', 'file:///D:/oj.daimayuan.top/problems.html?tag=' + encodeURIComponent($(this).text()));
+		$(this).attr('href', 'file//Doj.daimayuan.top/problems.html?tag=' + encodeURIComponent($(this).text()));
 	});
 }
 $.fn.uoj_blog_tag = function() {
 	return this.each(function() {
-		$(this).attr('href', 'file:///D:/oj.daimayuan.top/blog/archive.html?tag=' + encodeURIComponent($(this).text()));
+		$(this).attr('href', 'file//Doj.daimayuan.top/blog/archive.html?tag=' + encodeURIComponent($(this).text()));
 	});
 }
 
@@ -1234,7 +1240,7 @@ function showStandings() {
 				col_tr += '<td>';
 				col = score[row[2][0]][i];
 				if (col != undefined) {
-					col_tr += '<div><a href="file:///oj.daimayuan.top/submission/' + col[2] + '" class="uoj-score" style="color:' + getColOfScore(col[0]) + '">' + col[0] + '</a></div>';
+					col_tr += '<div><a href="file//oj.daimayuan.top/submission/' + col[2] + '" class="uoj-score" style="color:' + getColOfScore(col[0]) + '">' + col[0] + '</a></div>';
 					if (standings_version < 2) {
 						col_tr += '<div>' + getPenaltyTimeStr(col[1]) + '</div>';
 					} else {
@@ -1272,30 +1278,30 @@ var top_dock = document.querySelector("#navbarSupportedContent-dock");
 var top_dock_text = "";
 if (localStorage.getItem("zyxOT-v1-username") == null) {
 	if (localStorage.getItem("zyxOT-v1-guest-translation") == "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-guest-toushi") == "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-guest-help") == "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
 	if (localStorage.getItem("zyxOT-v1-guest-see_domain") == "true") {
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/domain.html">\n						<i class="bi bi-pie-chart"></i>\n						域管理					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/domain.html">\n						<i class="bi bi-pie-chart"></i>\n						域管理					</a>\n				</li>';
 	}
 	if (localStorage.getItem("zyxOT-v1-guest-manage") == "true") {
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/manage.html">\n						<i class="bi bi-grid-3x3-gap"></i>\n						全系统管理					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/manage.html">\n						<i class="bi bi-grid-3x3-gap"></i>\n						全系统管理					</a>\n				</li>';
 	}
 }
 else {
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-translation") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unseed") != "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/main.html">\n						<i class="bi bi-card-list"></i>\n						加密					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-toushi") == "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/submit.html">\n						<i class="bi bi-pencil-square"></i>\n						投食					</a>\n				</li>'
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-help") == "true" && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?unhelped") != "true") 
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/faq.html">\n						<i class="bi bi-question-circle"></i>\n						帮助					</a>\n				</li>';
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-see_domain") == "true") {
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/domain.html">\n						<i class="bi bi-pie-chart"></i>\n						域管理					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/domain.html">\n						<i class="bi bi-pie-chart"></i>\n						域管理					</a>\n				</li>';
 	}
 	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?manage") == 1 || localStorage.getItem("zyxOT-v1-default-manage") == "true") {
-		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + ':/ot.zyx.top/manage.html">\n						<i class="bi bi-grid-3x3-gap"></i>\n						全系统管理					</a>\n				</li>';
+		top_dock_text += '<li class="nav-item">\n					<a class="nav-link" href="' + localStorage.getItem("zyxOT-v1-deploy") + 'ot.zyx.top/manage.html">\n						<i class="bi bi-grid-3x3-gap"></i>\n						全系统管理					</a>\n				</li>';
 	}
 }
 top_dock.innerHTML = top_dock_text;
@@ -1311,7 +1317,7 @@ else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getIt
 else if (localStorage.getItem("zyxOT-v1-username") != null && localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-username") + "?banned") == 1) {
 	while (!confirm("您已被封禁"));
 	localStorage.removeItem("zyxOT-v1-username");
-	location.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/login.html";
+	location.href = localStorage.getItem("zyxOT-v1-deploy") + "ot.zyx.top/login.html";
 }
 
 document.querySelector("body").style.fontFamily = '"Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans"';
@@ -1320,8 +1326,24 @@ document.querySelector("body").style.fontFamily = '"Open Sans", "Open Sans", "Se
 var linkcss = document.createElement("link");
 linkcss.rel = "stylesheet";
 linkcss.type = "text/css";
-linkcss.href = localStorage.getItem("zyxOT-v1-deploy") + ":/ot.zyx.top/css/system.css";
+linkcss.href = localStorage.getItem("zyxOT-v1-deploy") + "ot.zyx.top/css/system.css";
 linkcss.media = "all";
 document.getElementsByTagName("head")[0].appendChild(linkcss);
+
+
+function remove_user() {
+	if (!confirm("确定注销账号吗？该操作不可逆！")) 
+		return;
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?banned");
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?color");
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?main-1");
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?main-2");
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?manage");
+	localStorage.removeItem("zyxOT-v1-user=" + uoj_username + "?muted");
+	localStorage.setItem("zyxOT-v1-user=" + uoj_username + "?password", -1);
+	while (!confirm("您登录的账号不存在。"));
+	localStorage.removeItem("zyxOT-v1-username");
+	location.href = localStorage.getItem("zyxOT-v1-deploy") + "ot.zyx.top.html";
+}
 
 

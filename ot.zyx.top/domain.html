@@ -322,9 +322,10 @@ function register() {
 				</thead>
 				<tbody>
 					<script>
-for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) {
-	document.write("<tr><td>" + i + "</td><td><span class='uoj-username'>" + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_admin" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_admin" style="cursor: pointer; user-select: none">root</label></td></tr>');
-}
+for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++)
+	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?password") != -1) {
+		document.write("<tr><td>" + i + "</td><td><span class='uoj-username'>" + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_admin" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_admin" style="cursor: pointer; user-select: none">root</label></td></tr>');
+	}
 					</script>
 				</tbody>
 			</table>
@@ -339,10 +340,12 @@ function to_admin() {
 		return;
 	}
 	for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) 
-		if (document.querySelector("#uid_" + i + "_admin").checked == true)
-			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage", 1);
-		else 
-			localStorage.removeItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage");
+		if (document.querySelector("#uid_" + i + "_admin") != null) {
+			if (document.querySelector("#uid_" + i + "_admin").checked == true)
+				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage", 1);
+			else 
+				localStorage.removeItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?manage");
+		}
 	alert("已更新用户权限。");
 }
 			</script>
@@ -450,7 +453,7 @@ function to_admin() {
 						<td colspan="5" style="background-color: #72beff; color: #fff; user-select: none;">隐私</td>
 					</tr>
 					<tr>
-						<td style="padding-left: 25px;"><small>查看/编辑用户隐私</small></td>
+						<td style="padding-left: 25px;"><small>进入/编辑用户后台</small></td>
 						<td style="text-align: center;"><input type="checkbox" id="PRIV_VIEW_USER_SECRET1"/></td>
 						<td style="text-align: center;"><input type="checkbox" id="PRIV_VIEW_USER_SECRET"/></td>
 						<td style="text-align: center;"><input type="checkbox" disabled /></td>
@@ -615,9 +618,10 @@ function to_perm() {
 				<tbody>
 					<script>
 document.write('<tr><td>#</td><td>ALL</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '">' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '</td><td><span class="uoj-score" data-max="100">100.000%</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '">' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '</td><td><span class="uoj-score" data-max="100">100.000%</td><td></td></tr>');
-for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) {
-	document.write('<tr><td>' + i + '</td><td><span class="uoj-username">' + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) / Number(localStorage.getItem("zyxOT-v1-main-1")) * 100).toFixed(3)) + '%</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) / Number(localStorage.getItem("zyxOT-v1-main-2")) * 100).toFixed(3)) + '%</td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_banned" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_banned" style="cursor: pointer; user-select: none">banned</label></td></tr>');
-}
+for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) 
+	if (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?password") != -1) {
+		document.write('<tr><td>' + i + '</td><td><span class="uoj-username">' + localStorage.getItem("zyxOT-v1-uid=" + i) + '</span></td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-1")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-1")) / Number(localStorage.getItem("zyxOT-v1-main-1")) * 100).toFixed(3)) + '%</td><td><span class="uoj-score" data-max="' + Number(localStorage.getItem("zyxOT-v1-main-2")) + '">' + Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) + '</td><td><span class="uoj-score" data-max="100">' + ((Number(localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?main-2")) / Number(localStorage.getItem("zyxOT-v1-main-2")) * 100).toFixed(3)) + '%</td><td><div class="form-check form-switch">  <input class="form-check-input" type="checkbox" id="uid_' + i + '_banned" name="darkmode" value="yes"' + (localStorage.getItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned") != null ? " checked" : "") + (i <= 2 ? " disabled" : "") + '><label class="form-check-label" for="uid_' + i + '_banned" style="cursor: pointer; user-select: none">banned</label></td></tr>');
+	}
 					</script>
 				</tbody>
 			</table>
@@ -632,10 +636,12 @@ function to_banned() {
 		return;
 	}
 	for (var i = 1; i <= localStorage.getItem("zyxOT-v1-uid"); i++) 
-		if (document.querySelector("#uid_" + i + "_banned").checked == true)
-			localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned", 1);
-		else 
-			localStorage.removeItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned");
+		if (document.querySelector("#uid_" + i + "_banned") != null) {
+			if (document.querySelector("#uid_" + i + "_banned").checked == true)
+				localStorage.setItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned", 1);
+			else 
+				localStorage.removeItem("zyxOT-v1-user=" + localStorage.getItem("zyxOT-v1-uid=" + i) + "?banned");
+		}
 	alert("已更新用户权限。");
 }
 			</script>
