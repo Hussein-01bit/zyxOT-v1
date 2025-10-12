@@ -1,3 +1,5 @@
+这里是 `zyxOT-v1`，如需 `v2` 的话，可前往 https://github.com/Hussein-01bit/zyxOT-v2 自取
+
 # 以下内容为更新内容，请务必看完。
 > 本次更新内容如下：
 > 
